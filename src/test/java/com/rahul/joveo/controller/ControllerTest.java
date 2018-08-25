@@ -35,5 +35,31 @@ public class ControllerTest {
 		s = contrer.getJob(id);
 		assertEquals("name", (String)s.getBody());
 	}
+	
+	@Test
+	public void testSeach(){
+		ResponseEntity<?> s = contrer.addJob("name");
+		boolean res = s.getBody()!=null;
+		assertEquals(res,true);
+		id = (Integer)s.getBody();
+		s = contrer.getJob(id);
+		assertEquals("name", (String)s.getBody());
+		s = contrer.searchJob(id, "newJob");
+		s = contrer.getJob(id);
+		assertEquals("newJob", (String)s.getBody());
+	}
+	
+	@Test
+	public void testDel(){
+		ResponseEntity<?> s = contrer.addJob("name");
+		boolean res = s.getBody()!=null;
+		assertEquals(res,true);
+		id = (Integer)s.getBody();
+		s = contrer.getJob(id);
+		assertEquals("name", (String)s.getBody());
+		s = contrer.delJob(id);
+		s = contrer.getJob(id);
+		assertEquals(null, s.getBody());
+	}
 
 }
